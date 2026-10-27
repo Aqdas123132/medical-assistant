@@ -4,9 +4,10 @@ config.py - Settings and form options for MediGuide AI.
 Everything that is a "setting" (API key, model names, dropdown choices,
 disclaimer text, colours) lives here so the rest of the code stays clean.
 """
-
+import streamlit as st
 import os
 from pathlib import Path
+
 
 from dotenv import load_dotenv
 
@@ -17,7 +18,7 @@ load_dotenv()
 # --------------------------------------------------------------------------
 # Secrets and model settings
 # --------------------------------------------------------------------------
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY", ""))
 DEFAULT_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 MODEL_OPTIONS = ["gpt-4o-mini", "gpt-4o", "gpt-4.1-mini"]
 DEFAULT_TEMPERATURE = 0.2
